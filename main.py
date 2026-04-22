@@ -1,14 +1,38 @@
-import os
-
 from dotenv import load_dotenv
+
+load_dotenv()
+
+from rag.agent import build_rag_graph
 
 
 def main() -> None:
-    load_dotenv()
     print("Version-Aware Agentic RAG")
-    print("Project scaffold is ready. Implement phases 2-10 next.")
-    print(f"CORPUS_ROOT={os.getenv('CORPUS_ROOT', './corpus')}")
-    print(f"INDEX_ROOT={os.getenv('INDEX_ROOT', './indexes')}")
+    print('Enter a code generation query. Type "exit" to quit.\n')
+
+    chain = build_rag_graph()
+
+    while True:
+        try:
+            question = input("> ").strip()
+        except (EOFError, KeyboardInterrupt):
+            print("\nExiting.")
+            break
+
+        if question.lower() == "exit":
+            break
+        if not question:
+            continue
+
+        state = {
+            "question": question,
+            "library": None,
+            "version": None,
+            "context": [],
+            "answer": "",
+        }
+
+        result = chain.invoke(state)
+        print(f"\n{result['answer']}\n")
 
 
 if __name__ == "__main__":
