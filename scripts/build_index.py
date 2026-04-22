@@ -17,8 +17,12 @@ LIBRARIES = ["pypdf", "langchain", "pandas", "scikit-learn", "tensorflow"]
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Build FAISS indexes from versioned corpus.")
-    parser.add_argument("--lib", choices=LIBRARIES, help="Build one library index only.")
+    parser = argparse.ArgumentParser(
+        description="Build FAISS indexes from versioned corpus."
+    )
+    parser.add_argument(
+        "--lib", choices=LIBRARIES, help="Build one library index only."
+    )
     parser.add_argument(
         "--combined",
         action="store_true",
