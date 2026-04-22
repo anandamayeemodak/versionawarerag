@@ -6,11 +6,17 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from rag.corpus import load_versioned_corpus
 
 
+_embeddings_cache: HuggingFaceEmbeddings | None = None
+
+
 def get_embeddings() -> HuggingFaceEmbeddings:
-    model_name = os.getenv("EMBED_MODEL", "all-MiniLM-L6-v2")
-    hf_token = os.getenv("HF_TOKEN")
-    model_kwargs = {"token": hf_token} if hf_token else {}
-    return HuggingFaceEmbeddings(model_name=model_name, model_kwargs=model_kwargs)
+    global _embeddings_cache
+    if _embeddings_cache is None:
+        model_name = os.getenv("EMBED_MODEL", "all-MiniLM-L6-v2")
+        hf_token = os.getenv("HF_TOKEN")
+        model_kwargs = {"token": hf_token} if hf_token else {}
+        _embeddings_cache = HuggingFaceEmbeddings(model_name=model_name, model_kwargs=model_kwargs)
+    return _embeddings_cache
 
 
 def build_library_index(library: str, corpus_root: str, index_root: str) -> FAISS:
