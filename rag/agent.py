@@ -42,6 +42,69 @@ Library names must be normalised to lowercase:
 """.strip()
 
 
+DEPRECATION_REGISTRY = {
+    "PdfFileReader": {
+        "library": "pypdf",
+        "deprecated_in": "2.0.0",
+        "removed_in": "3.0.0",
+        "replacement": "PdfReader",
+        "migration_note": "Replace PdfFileReader(path) with PdfReader(path).",
+    },
+    "PdfFileMerger": {
+        "library": "pypdf",
+        "deprecated_in": "2.0.0",
+        "removed_in": "3.0.0",
+        "replacement": "PdfMerger",
+        "migration_note": "Replace PdfFileMerger() with PdfMerger().",
+    },
+    "PdfFileWriter": {
+        "library": "pypdf",
+        "deprecated_in": "2.0.0",
+        "removed_in": "3.0.0",
+        "replacement": "PdfWriter",
+        "migration_note": "Replace PdfFileWriter() with PdfWriter().",
+    },
+    "getPage": {
+        "library": "pypdf",
+        "deprecated_in": "1.28.0",
+        "removed_in": "3.0.0",
+        "replacement": "reader.pages[n]",
+        "migration_note": "Replace reader.getPage(n) with reader.pages[n].",
+    },
+    "extractText": {
+        "library": "pypdf",
+        "deprecated_in": "2.0.0",
+        "removed_in": "3.0.0",
+        "replacement": "extract_text",
+        "migration_note": "Replace page.extractText() with page.extract_text().",
+    },
+}
+
+
+def deprecation_check(state: RAGState) -> str:
+    """Conditional edge: returns 'migration' if deprecated API detected, else 'retrieve'."""
+    question = state["question"]
+    for api_name in DEPRECATION_REGISTRY:
+        if api_name in question:
+            return "migration"
+    return "retrieve"
+
+
+def migration_node(state: RAGState) -> RAGState:
+    """Augments the question with deprecation context before retrieval."""
+    question = state["question"]
+    matched = [
+        info for api_name, info in DEPRECATION_REGISTRY.items() if api_name in question
+    ]
+    notes = " ".join(m["migration_note"] for m in matched)
+    augmented_question = (
+        f"{question}\n\n"
+        f"[System note: The user is referencing a deprecated API. {notes} "
+        f"Explain the deprecation and provide the modern equivalent.]"
+    )
+    return {**state, "question": augmented_question}
+
+
 def resolve_latest_version(library: str, corpus_root: str = "./corpus") -> str:
     lib_path = os.path.join(corpus_root, library)
     versions = []
@@ -123,11 +186,17 @@ def version_aware_retriever_node(state: RAGState) -> RAGState:
 def build_rag_graph():
     graph = StateGraph(RAGState)
     graph.add_node("extract_intent", intent_extraction_node)
+    graph.add_node("migration", migration_node)
     graph.add_node("retrieve", version_aware_retriever_node)
     graph.add_node("generate", generation_node)
 
     graph.add_edge(START, "extract_intent")
-    graph.add_edge("extract_intent", "retrieve")
+    graph.add_conditional_edges(
+        "extract_intent",
+        deprecation_check,
+        {"migration": "migration", "retrieve": "retrieve"},
+    )
+    graph.add_edge("migration", "retrieve")
     graph.add_conditional_edges(
         "retrieve",
         lambda s: "done" if s.get("answer") else "generate",
