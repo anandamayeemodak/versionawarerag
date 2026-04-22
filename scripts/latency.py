@@ -10,7 +10,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 # Load env before any rag imports so HF_TOKEN / GROQ_API_KEY are available
-load_dotenv(REPO_ROOT / ".env")
+load_dotenv(REPO_ROOT / ".env", override=True)
 
 from rag.agent import (
     deprecation_check,

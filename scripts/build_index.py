@@ -32,7 +32,7 @@ def parse_args() -> argparse.Namespace:
 
 
 def main() -> None:
-    load_dotenv()
+    load_dotenv(override=True)
     args = parse_args()
 
     corpus_root = os.getenv("CORPUS_ROOT", "./corpus")
