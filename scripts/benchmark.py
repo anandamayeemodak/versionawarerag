@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import sys
+import time
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -78,7 +79,7 @@ def score_response(response: str, correct_api: str, wrong_api: str) -> int:
     return 1 if (has_correct and not has_wrong) else 0
 
 
-def run_benchmark(cases: list[dict], pipeline: str) -> dict:
+def run_benchmark(cases: list[dict], pipeline: str, delay: float = 3.0) -> dict:
     results = {"naive": [], "versioned": []}
 
     for i, case in enumerate(cases):
@@ -107,6 +108,9 @@ def run_benchmark(cases: list[dict], pipeline: str) -> dict:
                 print(f"    versioned error: {e}")
                 score = 0
             results["versioned"].append({**case, "score": score})
+
+        if i < len(cases) - 1:
+            time.sleep(delay)
 
     return results
 
@@ -164,6 +168,12 @@ def parse_args() -> argparse.Namespace:
         help="Which pipeline(s) to evaluate.",
     )
     parser.add_argument("--output", help="Write markdown report to this file path.")
+    parser.add_argument(
+        "--delay",
+        type=float,
+        default=3.0,
+        help="Seconds to wait between cases to stay under Groq TPM limits (default: 3.0).",
+    )
     return parser.parse_args()
 
 
@@ -178,7 +188,7 @@ def main() -> None:
     target = f"{args.library or 'all libraries'}"
     print(f"Running {args.pipeline} pipeline(s) on {len(cases)} cases for {target}...\n")
 
-    results = run_benchmark(cases, args.pipeline)
+    results = run_benchmark(cases, args.pipeline, delay=args.delay)
     table = _format_table(results, args.pipeline)
 
     print("\n" + table)
