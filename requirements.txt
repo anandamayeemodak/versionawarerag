@@ -1,0 +1,13 @@
+langchain>=0.2
+langchain-community
+langchain-google-genai
+langgraph>=0.1
+faiss-cpu
+sentence-transformers
+unstructured[md]
+gitpython
+pydantic>=2
+packaging
+python-dotenv
+pytest
+pytest-benchmark
