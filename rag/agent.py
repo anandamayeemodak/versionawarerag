@@ -21,8 +21,14 @@ class RAGState(TypedDict):
 
 
 class IntentExtraction(BaseModel):
-    library: str | None = Field(None, description="The Python library name, normalised to lowercase (e.g. 'pypdf', 'pandas')")
-    version: str | None = Field(None, description="The explicit version string the user mentioned (e.g. '3.17.4'), or null if not stated")
+    library: str | None = Field(
+        None,
+        description="The Python library name, normalised to lowercase (e.g. 'pypdf', 'pandas')",
+    )
+    version: str | None = Field(
+        None,
+        description="The explicit version string the user mentioned (e.g. '3.17.4'), or null if not stated",
+    )
 
 
 INTENT_SYSTEM_PROMPT = """

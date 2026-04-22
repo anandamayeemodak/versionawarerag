@@ -1,1 +1,142 @@
-[]
+[
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I open a PDF file with pypdf 3.17.4?",
+    "correct_api": "PdfReader",
+    "wrong_api": "PdfFileReader"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I merge two PDF files using pypdf 3.17.4?",
+    "correct_api": "PdfMerger",
+    "wrong_api": "PdfFileMerger"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I extract text from a page with pypdf 3.17.4?",
+    "correct_api": "extract_text",
+    "wrong_api": "extractText"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I get the total number of pages in a PDF using pypdf 3.17.4?",
+    "correct_api": "reader.pages",
+    "wrong_api": "numPages"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I access a specific page by index with pypdf 3.17.4?",
+    "correct_api": "pages[",
+    "wrong_api": "getPage"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I read PDF document metadata using pypdf 3.17.4?",
+    "correct_api": "reader.metadata",
+    "wrong_api": "getDocumentInfo"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I create and write a new PDF file with pypdf 3.17.4?",
+    "correct_api": "PdfWriter",
+    "wrong_api": "PdfFileWriter"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I add a page to a PdfWriter object in pypdf 3.17.4?",
+    "correct_api": "add_page",
+    "wrong_api": "addPage"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I rotate a page 90 degrees clockwise in pypdf 3.17.4?",
+    "correct_api": "rotate(90)",
+    "wrong_api": "rotateClockwise"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I overlay or stamp one page on top of another with pypdf 3.17.4?",
+    "correct_api": "merge_page",
+    "wrong_api": "mergePage"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I encrypt a PDF with a password using pypdf 3.17.4?",
+    "correct_api": "encrypt",
+    "wrong_api": "PdfFileReader"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.17.4",
+    "query": "How do I add a bookmark or outline to a PDF with pypdf 3.17.4?",
+    "correct_api": "add_outline_item",
+    "wrong_api": "addBookmark"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.0.0",
+    "query": "How do I open a PDF file with pypdf 3.0.0?",
+    "correct_api": "PdfReader",
+    "wrong_api": "PdfFileReader"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.0.0",
+    "query": "How do I merge PDF files with pypdf 3.0.0?",
+    "correct_api": "PdfMerger",
+    "wrong_api": "PdfFileMerger"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.0.0",
+    "query": "How do I extract text from a PDF page using pypdf 3.0.0?",
+    "correct_api": "extract_text",
+    "wrong_api": "extractText"
+  },
+  {
+    "library": "pypdf",
+    "version": "3.0.0",
+    "query": "How do I get a page from a PdfReader using pypdf 3.0.0?",
+    "correct_api": "pages[",
+    "wrong_api": "getPage"
+  },
+  {
+    "library": "pypdf",
+    "version": "1.26.0",
+    "query": "How do I open a PDF file with pypdf 1.26.0?",
+    "correct_api": "PdfFileReader",
+    "wrong_api": "PdfReader"
+  },
+  {
+    "library": "pypdf",
+    "version": "1.26.0",
+    "query": "How do I get the number of pages in a PDF with pypdf 1.26.0?",
+    "correct_api": "numPages",
+    "wrong_api": "reader.pages"
+  },
+  {
+    "library": "pypdf",
+    "version": "1.26.0",
+    "query": "How do I extract text from a page with pypdf 1.26.0?",
+    "correct_api": "extractText",
+    "wrong_api": "extract_text"
+  },
+  {
+    "library": "pypdf",
+    "version": "1.26.0",
+    "query": "How do I merge PDF files with pypdf 1.26.0?",
+    "correct_api": "PdfFileMerger",
+    "wrong_api": "PdfMerger"
+  }
+]
