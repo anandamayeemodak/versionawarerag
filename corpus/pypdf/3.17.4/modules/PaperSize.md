@@ -1,0 +1,28 @@
+The PaperSize Class
+-------------------
+
+Add blank page with PaperSize
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: python
+
+    from pypdf import PaperSize, PdfReader, PdfWriter
+
+    pdf_reader = PdfReader("sample.pdf")
+    pdf_writer = PdfWriter()
+    pdf_writer.append_pages_from_reader(pdf_reader)
+    pdf_writer.add_blank_page(PaperSize.A8.width, PaperSize.A8.height)
+    with open("output.pdf", "wb") as output_stream:
+        pdf_writer.write(output_stream)
+
+Insert blank page with PaperSize
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. code-block:: python
+
+    from pypdf import PaperSize, PdfReader, PdfWriter
+
+    pdf_reader = PdfReader("sample.pdf")
+    pdf_writer = PdfWriter()
+    pdf_writer.append_pages_from_reader(pdf_reader)
+    pdf_writer.insert_blank_page(PaperSize.A8.width, PaperSize.A8.height, 1)
+    with open("output.pdf", "wb") as output_stream:
+        pdf_writer.write(output_stream)
