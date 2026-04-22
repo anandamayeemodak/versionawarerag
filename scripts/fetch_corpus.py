@@ -68,7 +68,10 @@ def convert_rst_to_markdown(src: Path, dst: Path) -> None:
     try:
         subprocess.run(cmd, check=True, capture_output=True, text=True)
     except (FileNotFoundError, subprocess.CalledProcessError):
-        dst.write_text(convert_rst_fallback(src.read_text(encoding="utf-8", errors="ignore")), encoding="utf-8")
+        dst.write_text(
+            convert_rst_fallback(src.read_text(encoding="utf-8", errors="ignore")),
+            encoding="utf-8",
+        )
 
 
 def discover_doc_dirs(repo_root: Path, configured_doc_dirs: list[str]) -> list[Path]:
@@ -90,7 +93,9 @@ def discover_doc_dirs(repo_root: Path, configured_doc_dirs: list[str]) -> list[P
     return discovered
 
 
-def fetch_library(library_name: str, config: dict, corpus_root: Path, force: bool = False) -> None:
+def fetch_library(
+    library_name: str, config: dict, corpus_root: Path, force: bool = False
+) -> None:
     print(f"\n[{library_name}] cloning {config['repo']}")
     with tempfile.TemporaryDirectory(prefix=f"{library_name}-repo-") as tmp_dir:
         repo = git.Repo.clone_from(config["repo"], tmp_dir, no_checkout=True)
@@ -121,7 +126,9 @@ def fetch_library(library_name: str, config: dict, corpus_root: Path, force: boo
 
             source_dirs = discover_doc_dirs(repo_root, config["doc_dirs"])
             if not source_dirs:
-                print(f"[{library_name} {tag}] no documentation directories found; scanning repository root")
+                print(
+                    f"[{library_name} {tag}] no documentation directories found; scanning repository root"
+                )
                 source_dirs = [repo_root]
 
             for source_dir in source_dirs:
@@ -154,9 +161,19 @@ def fetch_library(library_name: str, config: dict, corpus_root: Path, force: boo
 
 
 def parse_args() -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description="Fetch versioned documentation corpus from library git tags.")
-    parser.add_argument("--library", choices=sorted(LIBRARY_REGISTRY.keys()), help="Fetch one library only.")
-    parser.add_argument("--force", action="store_true", help="Re-fetch even if output corpus already exists.")
+    parser = argparse.ArgumentParser(
+        description="Fetch versioned documentation corpus from library git tags."
+    )
+    parser.add_argument(
+        "--library",
+        choices=sorted(LIBRARY_REGISTRY.keys()),
+        help="Fetch one library only.",
+    )
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="Re-fetch even if output corpus already exists.",
+    )
     parser.add_argument(
         "--corpus-root",
         default="./corpus",
@@ -172,7 +189,12 @@ def main() -> None:
 
     selected = [args.library] if args.library else list(LIBRARY_REGISTRY.keys())
     for library_name in selected:
-        fetch_library(library_name, LIBRARY_REGISTRY[library_name], corpus_root=corpus_root, force=args.force)
+        fetch_library(
+            library_name,
+            LIBRARY_REGISTRY[library_name],
+            corpus_root=corpus_root,
+            force=args.force,
+        )
 
 
 if __name__ == "__main__":
