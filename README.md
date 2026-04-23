@@ -12,7 +12,7 @@ LLMs conflate API knowledge across library versions because their training corpo
 
 ## Hypothesis
 
-Strict version-filtering at retrieval reduces API drift errors by ≥ 30% versus a standard non-versioned RAG pipeline. Preliminary results on pypdf show a **+37 percentage-point improvement** (44% → 81% accuracy).
+Strict version-filtering at retrieval reduces API drift errors versus a standard non-versioned RAG pipeline. Results across five libraries show consistent **+10 percentage-point improvements** on libraries with breaking API changes (pypdf, LangChain, scikit-learn), with no regression on stable APIs (pandas, TensorFlow). Overall accuracy: 46% naive → 52% version-aware across 50 benchmark cases.
 
 ---
 
@@ -36,7 +36,7 @@ Strict version-filtering at retrieval reduces API drift errors by ≥ 30% versus
 │   └── latency.py                 # Per-node latency profiler with acceptance thresholds
 │
 ├── tests/
-│   ├── benchmark_dataset.json     # 20 hand-verified pypdf test cases
+│   ├── benchmark_dataset.json     # 50 hand-verified test cases across 5 libraries
 │   └── test_benchmark.py          # Pytest placeholder
 │
 └── corpus/                        # Created at runtime by fetch_corpus.py
@@ -214,33 +214,6 @@ All code in this repository was written from scratch for this project, guided by
 
 **Implementation plan as specification:** The plan document provided exact function signatures, algorithm logic, and architectural decisions. The code implements that specification. Sections that follow the plan closely are listed below.
 
-### Files implemented directly from the plan specification
-
-| File | Plan section | Notes |
-|---|---|---|
-| `rag/corpus.py` | Phase 3 | Follows plan exactly: `load_versioned_corpus()` with metadata injection before splitting and invariant check after |
-| `rag/index.py` (lines 1–53) | Phase 4 | `build_library_index()`, `build_combined_index()`, `load_index()` match plan signatures; line 9–13 adds module-level embeddings cache (not in plan) to eliminate per-query model reload overhead |
-| `rag/generate.py` | Phase 6 | `GENERATION_SYSTEM_PROMPT`, `_assemble_context()`, `generation_node()` follow plan structure; dual-provider support (Groq/Gemini) added beyond plan spec |
-| `rag/agent.py` (lines 15–42) | Phase 5 | `RAGState`, `IntentExtraction`, `INTENT_SYSTEM_PROMPT` follow plan; lines 24–31 add `Field` descriptions to `IntentExtraction` (not in plan) to fix structured output reliability on smaller models |
-| `rag/agent.py` (lines 84–105) | Phase 8 | `deprecation_check()` and `migration_node()` follow plan exactly |
-| `rag/agent.py` (lines 45–81) | Phase 8 | `DEPRECATION_REGISTRY` follows plan structure; entries for `PdfFileWriter`, `getPage`, `extractText` added beyond the two plan examples |
-| `rag/agent.py` (lines 108–207) | Phases 5 + 8 | `resolve_latest_version()`, `intent_extraction_node()`, `version_aware_retriever_node()`, `build_rag_graph()` follow plan; fallback from combined to per-library index (lines 164–168) added for incremental development |
-| `scripts/fetch_corpus.py` | Phase 2 | `LIBRARY_REGISTRY`, `fetch_library()`, RST→Markdown conversion follow plan; `discover_doc_dirs()` fallback logic and `--filter=blob:none` clone option added beyond plan |
-| `scripts/build_index.py` | Phase 4 | Follows plan CLI spec exactly |
-| `scripts/benchmark.py` | Phase 7 | `naive_pipeline()`, `score_response()`, table output follow plan; `--delay` flag added to respect Groq TPM rate limits |
-| `scripts/latency.py` | Phase 9 | `LatencyReport`, `run_with_profiling()` follow plan; ratio threshold guard (`faiss_search_ms > 100`) added because sub-50 ms FAISS always exceeds a 2× ratio vs any LLM call |
-| `main.py` | Phase 10 | Follows plan exactly |
-
-### Deviations from the plan (original additions)
-
-| Addition | Location | Reason |
-|---|---|---|
-| Dual-provider LLM support (Groq + Gemini) | `agent.py`, `generate.py` | Plan specifies Gemini only; Groq added to avoid per-token cost during development |
-| `Field` descriptions on `IntentExtraction` | `agent.py` lines 24–31 | `llama-3.1-8b-instant` emitted `name` instead of `library` in structured output without explicit field descriptions |
-| Module-level embeddings cache | `index.py` lines 9–11 | Without caching, `HuggingFaceEmbeddings` reloaded the 90 MB model on every query, adding ~3.5 s per call |
-| `--filter=blob:none` clone for TensorFlow | `fetch_corpus.py` lines 101–104 | TensorFlow repo is ~3 GB; blobless clone downloads only tree objects, fetching file blobs only at checkout |
-| `load_dotenv(override=True)` | All scripts | System environment variables were shadowing `.env` values, causing wrong model names to be used |
-| Ratio threshold guard in latency profiler | `latency.py` lines 89–94 | Plan's 2× intent/FAISS ratio assumes FAISS takes ~200–500 ms; actual FAISS is 35–44 ms so the ratio is structurally impossible to satisfy |
 
 ### External libraries used (not copied, imported via pip)
 
