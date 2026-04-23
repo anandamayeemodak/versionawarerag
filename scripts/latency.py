@@ -31,6 +31,11 @@ TEST_QUESTIONS = [
     "How do I open a PDF file with pypdf 3.17.4?",
     "How do I extract text from a page with pypdf 3.17.4?",
     "How do I use PdfFileReader to open a PDF?",
+    "How do I merge PDFs with pypdf 3.17.4?",
+    "In pandas 1.5.3, how do I read a CSV file?",
+    "In scikit-learn 1.2.2, how do I split data into train and test sets?",
+    "In LangChain 0.1.0, how do I create an LLMChain?",
+    "In TensorFlow 2.12.0, how do I define a simple sequential model?",
 ]
 
 
