@@ -1,0 +1,68 @@
+{{ header }}
+
+.. _api.testing:
+
+=======
+Testing
+=======
+
+.. _api.general.testing:
+
+Assertion functions
+-------------------
+
+   testing.assert_frame_equal
+   testing.assert_series_equal
+   testing.assert_index_equal
+   testing.assert_extension_array_equal
+
+Exceptions and warnings
+-----------------------
+
+   errors.AbstractMethodError
+   errors.AccessorRegistrationWarning
+   errors.AttributeConflictWarning
+   errors.CategoricalConversionWarning
+   errors.ClosedFileError
+   errors.CSSWarning
+   errors.DatabaseError
+   errors.DataError
+   errors.DtypeWarning
+   errors.DuplicateLabelError
+   errors.EmptyDataError
+   errors.IncompatibilityWarning
+   errors.IndexingError
+   errors.InvalidColumnName
+   errors.InvalidIndexError
+   errors.IntCastingNaNError
+   errors.MergeError
+   errors.NullFrequencyError
+   errors.NumbaUtilError
+   errors.NumExprClobberingError
+   errors.OptionError
+   errors.OutOfBoundsDatetime
+   errors.OutOfBoundsTimedelta
+   errors.ParserError
+   errors.ParserWarning
+   errors.PerformanceWarning
+   errors.PossibleDataLossError
+   errors.PossiblePrecisionLoss
+   errors.PyperclipException
+   errors.PyperclipWindowsException
+   errors.SettingWithCopyError
+   errors.SettingWithCopyWarning
+   errors.SpecificationError
+   errors.UndefinedVariableError
+   errors.UnsortedIndexError
+   errors.UnsupportedFunctionCall
+   errors.ValueLabelTypeMismatch
+
+Bug report function
+-------------------
+
+   show_versions
+
+Test suite runner
+-----------------
+
+   test
