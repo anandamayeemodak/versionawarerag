@@ -9,9 +9,9 @@
   {
     "library": "pypdf",
     "version": "3.17.4",
-    "query": "Show me example code to iterate over pages in a PDF using pypdf 3.17.4.",
-    "correct_api": "PdfReader",
-    "wrong_api": "PdfFileReader"
+    "query": "Using pypdf 3.17.4, how do I extract text from the first page of a PDF?",
+    "correct_api": "page.extract_text",
+    "wrong_api": "page.extractText"
   },
   {
     "library": "pypdf",
@@ -23,53 +23,10 @@
   {
     "library": "pypdf",
     "version": "3.17.4",
-    "query": "Give me code in pypdf 3.17.4 to merge two PDF files and save the result.",
-    "correct_api": "PdfMerger",
-    "wrong_api": "PdfFileMerger"
-  },
-  {
-    "library": "pypdf",
-    "version": "3.17.4",
-    "query": "For pypdf 3.17.4, how do I get the number of pages in a PDF?",
-    "correct_api": "len(reader.pages)",
-    "wrong_api": "getNumPages"
-  },
-  {
-    "library": "pypdf",
-    "version": "3.17.4",
-    "query": "In pypdf 3.17.4, how do I access a specific page of a PDF?",
-    "correct_api": "reader.pages[0]",
-    "wrong_api": "reader.getPage"
-  },
-  {
-    "library": "pypdf",
-    "version": "3.17.4",
-    "query": "Using pypdf 3.17.4, how do I extract text from the first page of a PDF?",
-    "correct_api": "page.extract_text",
-    "wrong_api": "page.extractText"
-  },
-  {
-    "library": "pypdf",
-    "version": "3.17.4",
-    "query": "In pypdf 3.17.4, how do I add a blank page to a PDF?",
-    "correct_api": "add_blank_page",
-    "wrong_api": "addBlankPage"
-  },
-  {
-    "library": "pypdf",
-    "version": "3.17.4",
     "query": "How do I rotate a page in pypdf 3.17.4?",
     "correct_api": "rotate",
     "wrong_api": "rotateClockwise"
   },
-  {
-    "library": "pypdf",
-    "version": "3.17.4",
-    "query": "In pypdf 3.17.4, how do I write the modified PDF to disk?",
-    "correct_api": "writer.write",
-    "wrong_api": "writeStream"
-  },
-
   {
     "library": "pypdf",
     "version": "1.26.0",
@@ -80,9 +37,9 @@
   {
     "library": "pypdf",
     "version": "1.26.0",
-    "query": "Show me code to iterate over pages using pypdf 1.26.0.",
-    "correct_api": "getPage",
-    "wrong_api": "pages[0]"
+    "query": "In pypdf 1.26.0, how do I extract text from a page?",
+    "correct_api": "extractText",
+    "wrong_api": "extract_text"
   },
   {
     "library": "pypdf",
@@ -94,124 +51,103 @@
   {
     "library": "pypdf",
     "version": "1.26.0",
-    "query": "Using pypdf 1.26.0, how do I get the number of pages?",
-    "correct_api": "getNumPages",
-    "wrong_api": "len(reader.pages)"
-  },
-  {
-    "library": "pypdf",
-    "version": "1.26.0",
-    "query": "In pypdf 1.26.0, how do I extract text from a page?",
-    "correct_api": "page.extractText",
-    "wrong_api": "page.extract_text"
-  },
-  {
-    "library": "pypdf",
-    "version": "1.26.0",
-    "query": "How do I append a page to an existing PDF in pypdf 1.26.0?",
-    "correct_api": "append",
-    "wrong_api": "add_blank_page"
-  },
-  {
-    "library": "pypdf",
-    "version": "1.26.0",
     "query": "In pypdf 1.26.0, how do I rotate a page?",
     "correct_api": "rotateClockwise",
-    "wrong_api": "rotate"
+    "wrong_api": "rotate("
   },
   {
     "library": "pypdf",
-    "version": "1.26.0",
-    "query": "Using pypdf 1.26.0, how do I write the merged PDF to disk?",
-    "correct_api": "write",
-    "wrong_api": "writer.write"
+    "version": "3.0.0",
+    "query": "How do I open a PDF with pypdf 3.0.0?",
+    "correct_api": "PdfReader",
+    "wrong_api": "PdfFileReader"
   },
   {
     "library": "pypdf",
-    "version": "1.26.0",
-    "query": "For pypdf 1.26.0, how do I read a PDF from a path?",
-    "correct_api": "PdfFileReader(open(",
-    "wrong_api": "PdfReader("
-  },
-  {
-    "library": "pypdf",
-    "version": "1.26.0",
-    "query": "In pypdf 1.26.0, how do I close the file after writing?",
-    "correct_api": "fp.close",
-    "wrong_api": "with open("
+    "version": "3.0.0",
+    "query": "Using pypdf 3.0.0, how do I access a page by index?",
+    "correct_api": "reader.pages[",
+    "wrong_api": "reader.getPage"
   },
 
   {
     "library": "langchain",
     "version": "0.1.0",
-    "query": "In LangChain 0.1.0, how do I build a conversation chain?",
-    "correct_api": "ConversationChain",
-    "wrong_api": "RunnableParallel"
-  },
-  {
-    "library": "langchain",
-    "version": "0.1.0",
-    "query": "Using LangChain 0.1.0, how do I load a question-answering chain?",
-    "correct_api": "load_qa_chain",
-    "wrong_api": "create_retrieval_chain"
-  },
-  {
-    "library": "langchain",
-    "version": "0.1.0",
-    "query": "In LangChain 0.1.0, how do I create an LLMChain?",
+    "query": "In LangChain 0.1.0, how do I create a chain combining an LLM and a prompt?",
     "correct_api": "LLMChain",
     "wrong_api": "RunnableSequence"
   },
   {
     "library": "langchain",
     "version": "0.1.0",
-    "query": "How do I configure a memory object in LangChain 0.1.0?",
-    "correct_api": "ConversationBufferMemory",
-    "wrong_api": "RunnableWithMessageHistory"
-  },
-  {
-    "library": "langchain",
-    "version": "0.1.0",
-    "query": "How do I create a prompt template in LangChain 0.1.0?",
-    "correct_api": "PromptTemplate",
-    "wrong_api": "ChatPromptTemplate"
-  },
-  {
-    "library": "langchain",
-    "version": "0.1.0",
-    "query": "In LangChain 0.1.0, how do I index documents with FAISS?",
-    "correct_api": "FAISS.from_documents",
-    "wrong_api": "VectorStoreIndexCreator"
-  },
-  {
-    "library": "langchain",
-    "version": "0.1.0",
-    "query": "In LangChain 0.1.0, how do I call a chain to run on input?",
+    "query": "In LangChain 0.1.0, how do I run a chain on an input string?",
     "correct_api": "chain.run",
     "wrong_api": "chain.invoke"
   },
   {
     "library": "langchain",
     "version": "0.1.0",
-    "query": "Using LangChain 0.1.0, how do I create a tool for an agent?",
-    "correct_api": "@tool",
-    "wrong_api": "Tool.from_function"
-  },
-  {
-    "library": "langchain",
-    "version": "0.1.0",
-    "query": "How do I create a simple zero-shot agent in LangChain 0.1.0?",
+    "query": "How do I create a zero-shot agent in LangChain 0.1.0?",
     "correct_api": "initialize_agent",
     "wrong_api": "create_react_agent"
   },
   {
     "library": "langchain",
     "version": "0.1.0",
-    "query": "In LangChain 0.1.0, how do I run an agent on a question?",
-    "correct_api": "agent.run",
-    "wrong_api": "agent.invoke"
+    "query": "How do I add memory to a chain in LangChain 0.1.0?",
+    "correct_api": "ConversationBufferMemory",
+    "wrong_api": "RunnableWithMessageHistory"
+  },
+  {
+    "library": "langchain",
+    "version": "0.2.0",
+    "query": "In LangChain 0.2.0, how do I compose an LLM with a prompt using LCEL?",
+    "correct_api": "prompt | llm",
+    "wrong_api": "LLMChain("
+  },
+  {
+    "library": "langchain",
+    "version": "0.2.0",
+    "query": "In LangChain 0.2.0, how do I invoke a runnable chain?",
+    "correct_api": "chain.invoke",
+    "wrong_api": "chain.run("
+  },
+  {
+    "library": "langchain",
+    "version": "0.2.0",
+    "query": "In LangChain 0.2.0, how do I stream tokens from a chain?",
+    "correct_api": "chain.stream",
+    "wrong_api": "chain.run(verbose=True)"
+  },
+  {
+    "library": "langchain",
+    "version": "0.3.0",
+    "query": "In LangChain 0.3.0, how do I create a ReAct agent?",
+    "correct_api": "create_react_agent",
+    "wrong_api": "initialize_agent"
+  },
+  {
+    "library": "langchain",
+    "version": "0.3.0",
+    "query": "In LangChain 0.3.0, how do I handle conversation history in a chain?",
+    "correct_api": "RunnableWithMessageHistory",
+    "wrong_api": "ConversationBufferMemory"
+  },
+  {
+    "library": "langchain",
+    "version": "0.3.0",
+    "query": "In LangChain 0.3.0, how do I create a chat prompt with system and human messages?",
+    "correct_api": "ChatPromptTemplate",
+    "wrong_api": "PromptTemplate("
   },
 
+  {
+    "library": "pandas",
+    "version": "1.5.3",
+    "query": "In pandas 1.5.3, how do I append rows to a DataFrame?",
+    "correct_api": "df.append",
+    "wrong_api": "pd.concat"
+  },
   {
     "library": "pandas",
     "version": "1.5.3",
@@ -222,65 +158,58 @@
   {
     "library": "pandas",
     "version": "1.5.3",
-    "query": "Using pandas 1.5.3, how do I convert a column to datetime?",
+    "query": "Using pandas 1.5.3, how do I group by a column and aggregate?",
+    "correct_api": "groupby",
+    "wrong_api": "pivot_table("
+  },
+  {
+    "library": "pandas",
+    "version": "2.0.0",
+    "query": "In pandas 2.0.0, how do I append rows to a DataFrame?",
+    "correct_api": "pd.concat",
+    "wrong_api": "df.append"
+  },
+  {
+    "library": "pandas",
+    "version": "2.0.0",
+    "query": "In pandas 2.0.0, how do I create a DataFrame with nullable integer dtype?",
+    "correct_api": "Int64",
+    "wrong_api": "np.int64"
+  },
+  {
+    "library": "pandas",
+    "version": "2.0.0",
+    "query": "Using pandas 2.0.0, how do I check if Copy-on-Write is enabled?",
+    "correct_api": "copy_on_write",
+    "wrong_api": "df.copy(deep=False)"
+  },
+  {
+    "library": "pandas",
+    "version": "2.2.0",
+    "query": "In pandas 2.2.0, how do I create a conditional column using the new built-in method?",
+    "correct_api": "case_when",
+    "wrong_api": "np.where"
+  },
+  {
+    "library": "pandas",
+    "version": "2.2.0",
+    "query": "In pandas 2.2.0, how do I read a CSV using a nullable dtype backend?",
+    "correct_api": "dtype_backend",
+    "wrong_api": "dtype=object"
+  },
+  {
+    "library": "pandas",
+    "version": "2.2.0",
+    "query": "Using pandas 2.2.0, how do I convert a column to datetime with UTC timezone?",
     "correct_api": "to_datetime",
     "wrong_api": "convert_dtypes"
   },
   {
     "library": "pandas",
     "version": "1.5.3",
-    "query": "In pandas 1.5.3, how do I iterate over DataFrame rows?",
-    "correct_api": "iterrows",
-    "wrong_api": "itertuples(index=False, name=None)"
-  },
-  {
-    "library": "pandas",
-    "version": "1.5.3",
-    "query": "How do I get basic statistics for all numeric columns in pandas 1.5.3?",
-    "correct_api": "describe",
-    "wrong_api": "DataFrameSummary"
-  },
-  {
-    "library": "pandas",
-    "version": "1.5.3",
-    "query": "In pandas 1.5.3, how do I rename columns?",
+    "query": "In pandas 1.5.3, how do I rename columns in a DataFrame?",
     "correct_api": "df.rename",
     "wrong_api": "df.set_axis(axis=\"columns\")"
-  },
-  {
-    "library": "pandas",
-    "version": "1.5.3",
-    "query": "Using pandas 1.5.3, how do I group by a column and aggregate?",
-    "correct_api": "groupby",
-    "wrong_api": "DataFrameGroupBy.aggregate_named"
-  },
-  {
-    "library": "pandas",
-    "version": "1.5.3",
-    "query": "In pandas 1.5.3, how do I pivot a table?",
-    "correct_api": "pivot_table",
-    "wrong_api": "pivot_table(index=None)"
-  },
-  {
-    "library": "pandas",
-    "version": "1.5.3",
-    "query": "How do I filter rows in pandas 1.5.3 using a boolean mask?",
-    "correct_api": "df[mask]",
-    "wrong_api": "query_engine.filter"
-  },
-  {
-    "library": "pandas",
-    "version": "1.5.3",
-    "query": "In pandas 1.5.3, how do I create a DataFrame from a dict?",
-    "correct_api": "DataFrame(",
-    "wrong_api": "from_dict(orient=\"index\")"
-  },
-  {
-    "library": "pandas",
-    "version": "1.5.3",
-    "query": "Using pandas 1.5.3, how do I save a DataFrame to Excel?",
-    "correct_api": "to_excel",
-    "wrong_api": "to_markdown"
   },
 
   {
@@ -300,16 +229,9 @@
   {
     "library": "scikit-learn",
     "version": "1.2.2",
-    "query": "In scikit-learn 1.2.2, how do I standardize features?",
+    "query": "In scikit-learn 1.2.2, how do I standardize features before training?",
     "correct_api": "StandardScaler",
-    "wrong_api": "RobustScaler(with_centering=False)"
-  },
-  {
-    "library": "scikit-learn",
-    "version": "1.2.2",
-    "query": "How do I build a pipeline in scikit-learn 1.2.2?",
-    "correct_api": "make_pipeline",
-    "wrong_api": "ColumnTransformer.make_union"
+    "wrong_api": "RobustScaler"
   },
   {
     "library": "scikit-learn",
@@ -320,38 +242,45 @@
   },
   {
     "library": "scikit-learn",
-    "version": "1.2.2",
-    "query": "Using scikit-learn 1.2.2, how do I encode categorical features?",
+    "version": "1.3.0",
+    "query": "In scikit-learn 1.3.0, how do I configure a transformer to output a pandas DataFrame?",
+    "correct_api": "set_output",
+    "wrong_api": "get_feature_names_out"
+  },
+  {
+    "library": "scikit-learn",
+    "version": "1.3.0",
+    "query": "In scikit-learn 1.3.0, how do I build a pipeline of preprocessing steps?",
+    "correct_api": "make_pipeline",
+    "wrong_api": "FeatureUnion"
+  },
+  {
+    "library": "scikit-learn",
+    "version": "1.3.0",
+    "query": "Using scikit-learn 1.3.0, how do I encode categorical features?",
     "correct_api": "OneHotEncoder",
     "wrong_api": "TargetEncoder"
   },
   {
     "library": "scikit-learn",
-    "version": "1.2.2",
-    "query": "In scikit-learn 1.2.2, how do I compute accuracy of a classifier?",
-    "correct_api": "accuracy_score",
-    "wrong_api": "balanced_accuracy_score"
+    "version": "1.4.0",
+    "query": "In scikit-learn 1.4.0, how do I encode a categorical target variable using the new encoder?",
+    "correct_api": "TargetEncoder",
+    "wrong_api": "OrdinalEncoder"
   },
   {
     "library": "scikit-learn",
-    "version": "1.2.2",
-    "query": "How do I build a random forest classifier in scikit-learn 1.2.2?",
-    "correct_api": "RandomForestClassifier",
-    "wrong_api": "ExtraTreesClassifier"
-  },
-  {
-    "library": "scikit-learn",
-    "version": "1.2.2",
-    "query": "In scikit-learn 1.2.2, how do I perform k-means clustering?",
-    "correct_api": "KMeans",
-    "wrong_api": "MiniBatchKMeans"
-  },
-  {
-    "library": "scikit-learn",
-    "version": "1.2.2",
-    "query": "Using scikit-learn 1.2.2, how do I serialize a trained model?",
+    "version": "1.4.0",
+    "query": "Using scikit-learn 1.4.0, how do I serialize a trained model to disk?",
     "correct_api": "joblib.dump",
     "wrong_api": "pickle.dumps"
+  },
+  {
+    "library": "scikit-learn",
+    "version": "1.4.0",
+    "query": "In scikit-learn 1.4.0, how do I configure metadata routing for a pipeline?",
+    "correct_api": "set_fit_request",
+    "wrong_api": "fit(X, y, sample_weight"
   },
 
   {
@@ -364,64 +293,64 @@
   {
     "library": "tensorflow",
     "version": "2.12.0",
-    "query": "Using TensorFlow 2.12.0, how do I compile a Keras model?",
-    "correct_api": "model.compile",
-    "wrong_api": "tf.compat.v1.train.GradientDescentOptimizer"
-  },
-  {
-    "library": "tensorflow",
-    "version": "2.12.0",
-    "query": "In TensorFlow 2.12.0, how do I train a model on data?",
+    "query": "In TensorFlow 2.12.0, how do I train a Keras model?",
     "correct_api": "model.fit",
     "wrong_api": "sess.run"
   },
   {
     "library": "tensorflow",
     "version": "2.12.0",
-    "query": "How do I use tf.data in TensorFlow 2.12.0 to batch a dataset?",
-    "correct_api": "dataset.batch",
-    "wrong_api": "tf.compat.v1.train.batch"
-  },
-  {
-    "library": "tensorflow",
-    "version": "2.12.0",
-    "query": "In TensorFlow 2.12.0, how do I save a model to disk?",
-    "correct_api": "model.save",
-    "wrong_api": "tf.compat.v1.saved_model.simple_save"
-  },
-  {
-    "library": "tensorflow",
-    "version": "2.12.0",
-    "query": "Using TensorFlow 2.12.0, how do I add a dense layer?",
+    "query": "Using TensorFlow 2.12.0, how do I add a dense layer to a model?",
     "correct_api": "tf.keras.layers.Dense",
     "wrong_api": "tf.layers.dense"
   },
   {
     "library": "tensorflow",
     "version": "2.12.0",
-    "query": "In TensorFlow 2.12.0, how do I enable eager execution?",
-    "correct_api": "eager by default",
-    "wrong_api": "tf.compat.v1.enable_eager_execution"
-  },
-  {
-    "library": "tensorflow",
-    "version": "2.12.0",
-    "query": "How do I use GradientTape in TensorFlow 2.12.0?",
+    "query": "In TensorFlow 2.12.0, how do I implement a custom training loop?",
     "correct_api": "tf.GradientTape",
-    "wrong_api": "tf.compat.v1.GradientDescentOptimizer"
+    "wrong_api": "tf.compat.v1.train.GradientDescentOptimizer"
   },
   {
     "library": "tensorflow",
-    "version": "2.12.0",
-    "query": "In TensorFlow 2.12.0, how do I load the MNIST dataset?",
-    "correct_api": "tf.keras.datasets.mnist",
-    "wrong_api": "tf.examples.tutorials.mnist"
+    "version": "2.15.0",
+    "query": "In TensorFlow 2.15.0, how do I distribute training across multiple GPUs?",
+    "correct_api": "tf.distribute.MirroredStrategy",
+    "wrong_api": "tf.compat.v1.distribute.MirroredStrategy"
   },
   {
     "library": "tensorflow",
-    "version": "2.12.0",
-    "query": "Using TensorFlow 2.12.0, how do I create a checkpoint callback?",
-    "correct_api": "tf.keras.callbacks.ModelCheckpoint",
+    "version": "2.15.0",
+    "query": "In TensorFlow 2.15.0, how do I build an input pipeline from tensors?",
+    "correct_api": "tf.data.Dataset.from_tensor_slices",
+    "wrong_api": "tf.compat.v1.data.Dataset"
+  },
+  {
+    "library": "tensorflow",
+    "version": "2.15.0",
+    "query": "Using TensorFlow 2.15.0, how do I save and reload a model?",
+    "correct_api": "model.save",
+    "wrong_api": "tf.compat.v1.saved_model.simple_save"
+  },
+  {
+    "library": "tensorflow",
+    "version": "2.16.1",
+    "query": "In TensorFlow 2.16.1, how do I import the Keras library?",
+    "correct_api": "import keras",
+    "wrong_api": "from tensorflow import keras"
+  },
+  {
+    "library": "tensorflow",
+    "version": "2.16.1",
+    "query": "Using TensorFlow 2.16.1, how do I enable mixed precision training?",
+    "correct_api": "keras.mixed_precision.set_global_policy",
+    "wrong_api": "tf.keras.mixed_precision.Policy"
+  },
+  {
+    "library": "tensorflow",
+    "version": "2.16.1",
+    "query": "In TensorFlow 2.16.1, how do I create a checkpoint callback?",
+    "correct_api": "keras.callbacks.ModelCheckpoint",
     "wrong_api": "tf.train.Saver"
   }
 ]
