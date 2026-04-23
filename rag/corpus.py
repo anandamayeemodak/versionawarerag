@@ -2,7 +2,7 @@ from pathlib import Path
 
 from langchain_core.documents import Document
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.document_loaders import UnstructuredMarkdownLoader
+from langchain_community.document_loaders import TextLoader
 
 
 def load_versioned_corpus(library: str, root_dir: str) -> list[Document]:
@@ -23,7 +23,7 @@ def load_versioned_corpus(library: str, root_dir: str) -> list[Document]:
 
     for version_dir in sorted(p for p in library_root.iterdir() if p.is_dir()):
         for md_path in sorted(version_dir.rglob("*.md")):
-            loader = UnstructuredMarkdownLoader(str(md_path))
+            loader = TextLoader(str(md_path), encoding="utf-8", autodetect_encoding=True)
             docs = loader.load()
 
             for doc in docs:
