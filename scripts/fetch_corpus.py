@@ -17,7 +17,8 @@ LIBRARY_REGISTRY = {
     "langchain": {
         "repo": "https://github.com/langchain-ai/langchain.git",
         "doc_dirs": ["docs"],
-        "tags": ["v0.1.0", "v0.2.0", "v0.3.0"],
+        # 0.1.0 uses v-prefix; 0.2+ use package==version format
+        "tags": ["v0.1.0", "langchain==0.2.0", "langchain==0.3.0"],
     },
     "pandas": {
         "repo": "https://github.com/pandas-dev/pandas.git",
@@ -32,12 +33,18 @@ LIBRARY_REGISTRY = {
     "tensorflow": {
         "repo": "https://github.com/tensorflow/tensorflow.git",
         "doc_dirs": ["docs"],
-        "tags": ["v2.12.0", "v2.15.0", "v2.16.0"],
+        # v2.16.1 is the correct tag; v2.16.0 was never tagged
+        # WARNING: TF repo is ~3 GB of git objects — requires significant free disk space
+        "tags": ["v2.12.0", "v2.15.0", "v2.16.1"],
+        "filter": "blob:none",  # blobless clone to reduce disk usage
     },
 }
 
 
 def normalize_version(tag: str) -> str:
+    # Handle "package==X.Y.Z" format (e.g. LangChain monorepo tags)
+    if "==" in tag:
+        return tag.split("==", 1)[1]
     return tag.lstrip("v")
 
 
@@ -97,8 +104,11 @@ def fetch_library(
     library_name: str, config: dict, corpus_root: Path, force: bool = False
 ) -> None:
     print(f"\n[{library_name}] cloning {config['repo']}")
+    clone_kwargs: dict = {"no_checkout": True}
+    if config.get("filter"):
+        clone_kwargs["multi_options"] = [f"--filter={config['filter']}"]
     with tempfile.TemporaryDirectory(prefix=f"{library_name}-repo-") as tmp_dir:
-        repo = git.Repo.clone_from(config["repo"], tmp_dir, no_checkout=True)
+        repo = git.Repo.clone_from(config["repo"], tmp_dir, **clone_kwargs)
         repo_root = Path(tmp_dir)
 
         for tag in config["tags"]:
